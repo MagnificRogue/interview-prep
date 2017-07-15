@@ -10,8 +10,8 @@ class SimpleSearch
     int target = 4; 
 
     try {
-      assert(simpleSearch(target, arrTest) == false);
-      assert(simpleSearch(-1, arrTest) == false);
+      assert simpleSearch(target, arrTest) == true;
+      assert simpleSearch(-1, arrTest) == false;
       simpleSearch(target, null); //Expected Exception case
     } catch (Exception e) {
       System.out.println(e);  
