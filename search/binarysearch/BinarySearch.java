@@ -10,26 +10,20 @@ class BinarySearch
     int[] arrTest  = {1,2,3,4,5,6,7,8,9,10};
     int target = 4; 
 
-    try {
-      assert binarySearch(target, arrTest) == true;
-      assert binarySearch(-1, arrTest) == false;
-      binarySearch(target, null); //Expected Exception case
-    } catch (Exception e) {
-      System.out.println(e);  
-    }
-
+    assert binarySearch(target, arrTest) != -1;
+    assert binarySearch(-1, arrTest) == -1;
+    assert binarySearch(target, null) == -1;
   }
 
 
   /**
    * @param target An integer that is searched for in the array
    * @param array An array to be searched (note: this array MUST be sorted)
-   * @throws RuntimeException if the given array is null
-   * @return A boolean describing if the target is found in the array
+   * @return An integer describing the target value's location in the array, -1 if it is not found
    */
-  public static boolean binarySearch(int target, int[] array) throws Exception {
+  public static int binarySearch(int target, int[] array) throws Exception {
     if (array == null)
-      throw new RuntimeException("Error, search array given is null");
+      return -1;
 
     return binarySearchHelper(target, array, 0, array.length-1);
   }
@@ -40,18 +34,18 @@ class BinarySearch
    * @param array An array to be searched (note: this array MUST be sorted)   
    * @param leftIndex A left comparison index used for search
    * @param rightIndex A right comparison index used for each
-   * @returns A boolean describing if the target is found in the array
+   * @return An integer describing the target value's location in the array, -1 if it is not found
    */
-  private static boolean binarySearchHelper(int target, int[] array, int leftIndex, int rightIndex) {
+  private static int binarySearchHelper(int target, int[] array, int leftIndex, int rightIndex) {
 
     // base recursive case
     if (leftIndex > rightIndex)
-      return false;
+      return -1;
 
     int midIndex = leftIndex + (rightIndex - leftIndex)/2;
 
     if(target == array[midIndex]) 
-      return true;
+      return midIndex;
 
     if(target < array[midIndex]) {
       return binarySearchHelper(target, array, leftIndex, midIndex-1);
